@@ -36,7 +36,7 @@ class ApiClient extends http.BaseClient {
           .info("==========================================================");
       return value;
     }).catchError((err) {
-      debugPrint(err.toString());
+      throw Exception(err.toString());
     });
   }
 
@@ -53,7 +53,7 @@ class ApiClient extends http.BaseClient {
           .info("==========================================================");
       return value;
     }).catchError((err) {
-      debugPrint(err.toString());
+      throw Exception(err.toString());
     });
   }
 }
