@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logging/logging.dart';
 import 'package:get_it/get_it.dart';
 
+import 'config/router/app_router.gr.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefHelper.instance.init();
@@ -15,10 +17,12 @@ void main() async {
     debugPrint(event.message);
   });
 
-  GetIt.I.registerSingleton<AppRouter>(AppRouter(
-    authGuard: AuthGuard(),
-    firstInstallGuard: FirstInstallGuard(),
-  ));
+  GetIt.I.registerSingleton<AppRouter>(
+    AppRouter(
+      firstInstallGuard: FirstInstallGuard(),
+      authGuard: AuthGuard(),
+    ),
+  );
   runApp(MyApp());
 }
 

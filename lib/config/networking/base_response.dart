@@ -28,25 +28,21 @@ class BaseResponse {
 }
 
 class Result {
-  Result({
-    this.login,
-    this.trip,
-    this.yourRoomies,
-    this.otherMatches,
-  });
+  Result({this.login, this.trip, this.yourRoomies, this.otherMatches});
 
   Result.fromJson(dynamic json) {
     login = json['login'] != null ? Login.fromJson(json['login']) : null;
     trip = json['trip'] != null ? Trip.fromJson(json['trip']) : null;
-    if (json['your_roomies'] != null) {
+    if (json['yourRoomies'] != null) {
       yourRoomies = [];
-      json['your_roomies'].forEach((v) {
+      json['yourRoomies'].forEach((v) {
         yourRoomies?.add(Trip.fromJson(v));
       });
     }
-    if (json['other_matches'] != null) {
+
+    if (json['otherMatches'] != null) {
       otherMatches = [];
-      json['other_matches'].forEach((v) {
+      json['otherMatches'].forEach((v) {
         otherMatches?.add(Trip.fromJson(v));
       });
     }
@@ -64,9 +60,16 @@ class Result {
     List<Trip>? otherMatches,
   }) =>
       Result(
-          login: login ?? this.login,
-          trip: trip ?? this.trip,
-          yourRoomies: yourRoomies ?? this.yourRoomies,
-          otherMatches: otherMatches ?? this.otherMatches);
+        login: login ?? this.login,
+        trip: trip ?? this.trip,
+        yourRoomies: yourRoomies ?? this.yourRoomies,
+        otherMatches: otherMatches ?? this.otherMatches,
+      );
 
+  Map toJson() => {
+        'login': login,
+        'trip': trip?.toJson() ?? {},
+        'yourRoomies': yourRoomies?.map((e) => e.toJson()).toList() ?? [],
+        'otherMatches': otherMatches?.map((e) => e.toJson()).toList() ?? [],
+      };
 }

@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:booking_app/config/router/app_router.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../config/router/app_router.gr.dart';
 import 'welcome_state.dart';
 
 class WelcomeCubit extends Cubit<WelcomeState> {

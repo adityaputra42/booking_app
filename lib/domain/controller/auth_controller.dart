@@ -22,7 +22,7 @@ class AuthController implements AuthRepository {
     );
     _httpState.onEndRequest(url, method);
     if (response.statusCode < 500) {
-      _httpState.onSuccesRequest(url, method);
+      _httpState.onSuccessRequest(url, method);
       baseResponse = BaseResponse.fromJson(jsonDecode(response.body));
     } else {
       _httpState.onErrorRequest(url, method);
@@ -47,7 +47,7 @@ class AuthController implements AuthRepository {
     );
     _httpState.onEndRequest(url, method);
     if (response.statusCode < 500) {
-      _httpState.onSuccesRequest(url, method);
+      _httpState.onSuccessRequest(url, method);
       baseResponse = BaseResponse.fromJson(jsonDecode(response.body));
     } else {
       _httpState.onErrorRequest(url, method);
@@ -83,7 +83,7 @@ class AuthController implements AuthRepository {
     _httpState.onEndRequest(url, method);
     if (response.statusCode < 500) {
       if (response.statusCode > 199 && response.statusCode < 300) {
-        _httpState.onSuccesRequest(url, method);
+        _httpState.onSuccessRequest(url, method);
         baseResponse = BaseResponse.fromJson(jsonDecode(response.body));
       } else {
         _httpState.onErrorRequest(url, method);

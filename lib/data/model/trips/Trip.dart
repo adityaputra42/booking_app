@@ -1,18 +1,20 @@
-import 'Tags.dart';
+import 'package:booking_app/data/model/trips/Tags.dart';
 
 class Trip {
   Trip({
-      this.id, 
-      this.name, 
-      this.location, 
-      this.price, 
-      this.mattchesAvatar, 
-      this.locationAvatar, 
-      this.detail, 
-      this.days, 
-      this.tags,});
+    this.id,
+    this.name,
+    this.location,
+    this.price,
+    this.mattchesAvatar,
+    this.locationAvatar,
+    this.detail,
+    this.days,
+    this.tags,
+  });
 
-  Trip.fromJson(dynamic json) {
+
+  Trip.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     location = json['location'];
@@ -24,12 +26,13 @@ class Trip {
     if (json['tags'] != null) {
       tags = [];
       json['tags'].forEach((v) {
-        tags!.add(Tags.fromJson(v));
+        tags?.add(Tags.fromJson(v));
       });
     }
   }
+
   int? id;
-  String ?name;
+  String? name;
   String? location;
   int? price;
   String? mattchesAvatar;
@@ -37,6 +40,29 @@ class Trip {
   String? detail;
   int? days;
   List<Tags>? tags;
+
+  Trip copyWith({
+    int? id,
+    String? name,
+    String? location,
+    int? price,
+    String? mattchesAvatar,
+    String? locationAvatar,
+    String? detail,
+    int? days,
+    List<Tags>? tags,
+  }) =>
+      Trip(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        location: location ?? this.location,
+        price: price ?? this.price,
+        mattchesAvatar: mattchesAvatar ?? this.mattchesAvatar,
+        locationAvatar: locationAvatar ?? this.locationAvatar,
+        detail: detail ?? this.detail,
+        days: days ?? this.days,
+        tags: tags ?? this.tags,
+      );
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -49,9 +75,8 @@ class Trip {
     map['detail'] = detail;
     map['days'] = days;
     if (tags != null) {
-      map['tags'] = tags!.map((v) => v.toJson()).toList();
+      map['tags'] = tags?.map((v) => v.toJson()).toList();
     }
     return map;
   }
-
 }

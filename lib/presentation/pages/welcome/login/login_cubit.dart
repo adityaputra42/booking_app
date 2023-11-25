@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:logging/logging.dart';
 
 import '../../../../config/config.dart';
+import '../../../../config/router/app_router.gr.dart';
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> implements HttpState {
@@ -41,5 +42,10 @@ class LoginCubit extends Cubit<LoginState> implements HttpState {
   @override
   void onSuccesRequest(String url, String method) {
     Logger.root.info("onSuccesRequest $url $method");
+  }
+  
+  @override
+  void onSuccessRequest(String url, String method) {
+    // TODO: implement onSuccessRequest
   }
 }

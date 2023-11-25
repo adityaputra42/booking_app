@@ -1,16 +1,18 @@
 import 'package:bloc/bloc.dart';
 import 'package:logging/logging.dart';
 
+import '../../../../config/config.dart';
 import '../../../../domain/controller/controller.dart';
 import 'trips_state.dart';
 
 class TripsCubit extends Cubit<TripsState> {
   TripsCubit() : super(TripsState().init());
-  late final TripController _tripController = TripController();
+ 
+  late final TripController _tripController = TripController(this as HttpState);
 
   void getTrips() async {
     final trips = await _tripController.getTrips();
-    Logger.root.info(trips.result?.trip);
+    Logger.root.info(trips.result?.toJson());
     emit(
       state.clone()
         ..yourRoomies = trips.result?.yourRoomies ?? []
@@ -20,30 +22,36 @@ class TripsCubit extends Cubit<TripsState> {
         'TripsCubit getTrips ${state.yourRoomies.length} ${state.otherMatches.length}');
   }
 
-  // @override
-  // void onEndRequest(String url, String method) {
-  //   // emit(
-  //   //     state.clone()
-  //   //       ..status = HttpStateStatus.idle
-  //   // );
-  // }
+  @override
+  void onEndRequest(String url, String method) {
+    // emit(
+    //     state.clone()
+    //       ..status = HttpStateStatus.idle
+    // );
+  }
 
-  // @override
-  // void onErrorRequest(String url, String method) {
-  //   Logger.root.info('TripsCubit onErrorRequest');
-  //   // emit(
-  //   //     state.clone()
-  //   //       ..status = HttpStateStatus.error
-  //   // );
-  // }
+  @override
+  void onErrorRequest(String url, String method) {
+    Logger.root.info('TripsCubit onErrorRequest');
+    emit(
+        state.clone()
+          ..status = HttpStateStatus.error
+    );
+  }
 
-  // @override
-  // void onStartRequest(String url, String method) {
-  //   emit(state.clone()..status = HttpStateStatus.loading);
-  // }
+  @override
+  void onStartRequest(String url, String method) {
+    emit(
+        state.clone()
+          ..status = HttpStateStatus.loading
+    );
+  }
 
-  // @override
-  // void onSuccessRequest(String url, String method) {
-  //   emit(state.clone()..status = HttpStateStatus.success);
-  // }
+  @override
+  void onSuccessRequest(String url, String method) {
+    emit(
+        state.clone()
+          ..status = HttpStateStatus.success
+    );
+  }
 }

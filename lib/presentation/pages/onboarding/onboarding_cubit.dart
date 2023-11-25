@@ -3,6 +3,7 @@ import 'package:booking_app/config/router/app_router.dart';
 import 'package:booking_app/util/helper/helper.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../config/router/app_router.gr.dart';
 import 'onboarding_state.dart';
 
 class OnboardingCubit extends Cubit<OnboardingState> {
