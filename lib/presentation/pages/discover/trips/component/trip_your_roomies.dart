@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../config/config.dart';
+import '../../../../../data/model/trips/Trip.dart';
 
 class TripsYourRoomies extends StatelessWidget {
   const TripsYourRoomies({Key? key,
-    // required this.yourRoomies,
+    required this.yourRoomies,
   }
       ) : super(key: key);
-  // final List<Trip> yourRoomies;
+  final List<Trip> yourRoomies;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -25,13 +26,13 @@ class TripsYourRoomies extends StatelessWidget {
     return Expanded(
       child:
       ListView.builder(
-        itemBuilder: (c, i) => _roomiesItem(),
-        itemCount:5,
+        itemBuilder: (c, i) => _roomiesItem(yourRoomies[i]),
+        itemCount:yourRoomies.length,
       ),
     );
   }
 
-  Widget _roomiesItem() {
+  Widget _roomiesItem(Trip trip) {
     return Container(
       height: 72,
       margin: EdgeInsets.only(
@@ -53,13 +54,13 @@ class TripsYourRoomies extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  // trip.name ?? '',
-                  'name',
+                  trip.name ?? '',
+                  // 'name',
                   style: AppFont.paragraphMediumBold,
                 ),
                 Text(
-                  // trip.location ?? '',
-                  'Jakarta',
+                  trip.location ?? '',
+                  // 'Jakarta',
                   style: AppFont.paragraphSmall.copyWith(
                     color: AppColor.darkerGray,
                   ),

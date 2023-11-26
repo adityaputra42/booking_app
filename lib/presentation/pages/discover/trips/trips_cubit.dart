@@ -5,10 +5,10 @@ import '../../../../config/config.dart';
 import '../../../../domain/controller/controller.dart';
 import 'trips_state.dart';
 
-class TripsCubit extends Cubit<TripsState> {
+class TripsCubit extends Cubit<TripsState> implements HttpState {
   TripsCubit() : super(TripsState().init());
  
-  late final TripController _tripController = TripController(this as HttpState);
+  late final TripController _tripController = TripController(this);
 
   void getTrips() async {
     final trips = await _tripController.getTrips();

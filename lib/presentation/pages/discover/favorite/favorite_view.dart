@@ -22,10 +22,10 @@ class FavoritePage extends StatelessWidget {
     final cubit = BlocProvider.of<FavoriteCubit>(context);
 
 
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: AppColor.whiteBackground,
       body: Column(
-        children: const [
+        children: [
           FavoriteTitle(),
           FavoriteHeader(),
           FavoriteList()
